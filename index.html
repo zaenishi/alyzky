@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Alyzky - Moment</title>
+  <!-- Google Fonts untuk kesan tulisan tangan dan estetik -->
+  <link href="https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Indie+Flower&family=Patrick+Hand&family=Quicksand:wght@500&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-color: #fdf6e3;
+      --paper-color: #ffffff;
+      --tape-color: rgba(255, 182, 193, 0.6);
+      --accent-color: #ff85a2;
+      --text-color: #444;
+    }
+
+    body {
+      background-color: var(--bg-color);
+      background-image: radial-gradient(#d1d1d1 1px, transparent 1px);
+      background-size: 20px 20px; /* Pola titik-titik buku diary */
+      font-family: 'Quicksand', sans-serif;
+      color: var(--text-color);
+      margin: 0;
+      padding: 20px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* Dekorasi tambahan */
+    .sticker {
+      position: fixed;
+      z-index: -1;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    /* Container Utama */
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    /* Header Section */
+    .utama {
+      text-align: center;
+      background: var(--paper-color);
+      padding: 40px 20px;
+      margin-bottom: 50px;
+      transform: rotate(-1deg);
+      box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+      border: 1px solid #eee;
+      position: relative;
+    }
+
+    .utama::before { /* Efek isolasi di atas */
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 35px;
+      background: var(--tape-color);
+      box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+    }
+
+    h1 {
+      font-family: 'Gochi Hand', cursive;
+      font-size: 3.5rem;
+      color: var(--accent-color);
+      margin-bottom: 10px;
+    }
+
+    /* Konten Teks Gaya Potongan Kertas */
+    .teksUtama p, .ucapan p {
+      background: #fff;
+      padding: 25px;
+      margin: 30px 0;
+      border-radius: 2px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.03);
+      position: relative;
+      font-family: 'Patrick Hand', cursive;
+      font-size: 1.25rem;
+      transition: transform 0.3s ease;
+    }
+
+    /* Variasi rotasi kertas agar terlihat berantakan estetik */
+    .teksUtama p:nth-child(odd) { transform: rotate(1deg); border-left: 5px solid #ffb6c1; }
+    .teksUtama p:nth-child(even) { transform: rotate(-1.5deg); border-left: 5px solid #add8e6; }
+    
+    .teksUtama p:hover {
+      transform: scale(1.02) rotate(0deg);
+      z-index: 10;
+      cursor: pointer;
+    }
+
+    /* Foto/Ilustrasi Pemanis */
+    .photo-frame {
+      width: 200px;
+      background: white;
+      padding: 10px 10px 30px 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      margin: 20px auto;
+      transform: rotate(5deg);
+      text-align: center;
+    }
+
+    .photo-frame img {
+      width: 100%;
+      height: auto;
+      filter: sepia(20%);
+    }
+
+    .photo-frame span {
+      font-family: 'Indie Flower', cursive;
+      font-size: 0.9rem;
+      color: #888;
+    }
+
+    /* Bagian Akhir */
+    .ucapan {
+      margin-top: 60px;
+      padding: 30px;
+      background: #fff0f5;
+      border: 2px dashed #ffb6c1;
+      border-radius: 15px;
+    }
+
+    h5 {
+      font-family: 'Gochi Hand', cursive;
+      font-size: 1.8rem;
+      text-align: center;
+      color: #d14d72;
+    }
+
+    /* Animasi Interaksi: Floating Hearts */
+    .heart {
+      position: absolute;
+      color: #ff85a2;
+      font-size: 20px;
+      pointer-events: none;
+      animation: flyUp 3s linear forwards;
+    }
+
+    @keyframes flyUp {
+      0% { transform: translateY(0) scale(1); opacity: 1; }
+      100% { transform: translateY(-100px) scale(1.5); opacity: 0; }
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      h1 { font-size: 2.5rem; }
+      .teksUtama p { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dekorasi Random -->
+  <div class="sticker" style="top: 10%; left: 5%; font-size: 40px;">🌸</div>
+  <div class="sticker" style="bottom: 20%; right: 5%; font-size: 50px;">🧸</div>
+  <div class="sticker" style="top: 50%; left: 2%; font-size: 30px;">✨</div>
+
+  <div class="container">
+    <div class="utama">
+      <h1>Hai sayangg!</h1>
+      <p>Website ini aku jadikan kenangan agar kita tetep abadi, dan tertulis di dalam layar.</p>
+    </div>
+
+    <!-- Foto Pemanis 1 -->
+    <div class="photo-frame">
+      <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Felix" alt="cute-avatar">
+      <span>Our First Date vibe ✨</span>
+    </div>
+
+    <div class="teksUtama" id="journal">
+      <p>Kamu sadar ga si perjalanan kita sudah sejauh inii!? AHAHAHAHA, padahal perasaanku belum begitu lama aku merayumu. Eh udah 1 tahun ajaa! padahal pas awal-awal kamu ragu adanya keberadaanku, ya emang sii.. aku terlalu sat-set, harusnya basa basi duluuu. SUSAH TAU DAPETIN KAMU, makanya aku bersyukur dan bangga bisa sejauh ini sama kamu, padahal dulunya cuma orang asing yang ga sengaja dipertemukan, dan anehnya langsung nyambung, AHAHAHAHA langsung baper lagi akunya.. Emang kamu tuh se-magis itu ya!? peletnya mantep banget!</p>
+      
+      <p>Setelah pertemukan yang ga disengaja, kita semakij dekettt! udah nyambung, udah mulai ada perasaan yang munculll! jadi sering ngabarin, chatan, telponan, saling curhat, cerita keseharian kitaaa! SERU TAU, INI JADI HAL PALING INDAH YANG AKU DAPETIN SEJAUH INII</p>
+
+      <p>Pas udah lumayan lama, kita mulai saling percaya satu sama lain, UDAH MULAI NIHH! mulai berkontribusi, TERUS JADIAN DEHH, KAMU TAU GA SI AKU SE-SENENG APA PAS UDAH JADIAN!? SENENG BANGETTT</p>
+
+      <!-- Foto Pemanis 2 -->
+      <div class="photo-frame" style="transform: rotate(-5deg); margin-left: 10px;">
+        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Aneka" alt="cute-avatar">
+        <span>Pas kamu lagi ngambek lucu 🍦</span>
+      </div>
+
+      <p>Singkat cerita, kita udah lumayan lama punya arti "kita". Udah ada masalah-masalah muncul nih, datengnya dari aku sii.. Y MAAB</p>
+      
+      <p>EH, TAPI KITA BISA LEWATIN SEMUANYAA, meski ada bencana-bencana longsor gempa si, kadang hujan yang ga bisa berentii</p>
+
+      <p>AHAHAHAHA INI YANG LUCU SI KALO DI INGET, pas pertama kita ketemu, perginya ketukang buburr AHAHAHAHA, jujur aja sii, emang lagi ga megang uang banyakk, soalnya ngedadakk, cuma maksa buat ketemuu, mohon maaf aja nih yaaa.. kalo kamu tau, aku cuma bawa uang 20rb njir.. tanpa persiapan, tanpa perencanaan.. jujur lucu. kamu aduk-aduk buburnya sampe bener-bener jadi air.. AHAHAHAHA, nih ya, kamu inget ga si pas kamu mau minum? disitu aku ngangkat teko aja GEMETERR, saking masih malu-malunyaa.. cuma pura-pura tegar aja biar LAKIK BANGETT</p>
+
+      <p>Terus keduanya kita main dengan keadaan matang, udah ada sedikit persiapan, si cepot yang menjadi saksi. mana temen kamu kepo lagii! disini aku udah mulai berani buat natap kamu dengan rasa syukur, bangga, kalo kamu sekarang milik aku sepenuhnyaa.. tapi kayaknya disini peluk-peluk masih sedikit malu ya!? AHAHAHA</p>
+
+      <p>terus yang ketiga kalo gasalah kita main pas hujann!? eh.. iya ga sii!? SERU TAUUU, INI PART YANG AKU SUKAA, gatau kenapa, serasa dunia milik berdua ajaa.. peluk-peluk aja udah nyamannn, aku kamu dan dengklok AHAHAHAHA, MANA AKUNYA DIPELUK-PELUK, DI USAP-USAPP, part ini yang paling aku ingettt</p>
+
+      <p>YANG KE EMPATT, kalo gasalah kita makan di tukang nasi gorengggg, YANG KEMBALIANNYA SALAHHH, TERUS ADA RAMBUT DIMAKANAN KAMU, AHAHAHAHA, jujur yaa, aku kalo makan nasi ya kuat jirr, makanya kamu ga abis aku gabisaaa, GABISAA, ga kuattt, mana hp kamu jatoh lagi pas nonton, parah banget ya tukang jualnyaa</p>
+
+      <h5>Baru dikit perjalanan kitaaa, NANTI KITA UKIR LAGI YANG BANYAKK YAAA, SAMA-SAMA TERUSSS</h5>
+    </div>
+    
+    <div class="ucapan">
+      <p>Aku bersyukur adanya kamu disini bebeyy.. yang udah nemenin aku, yang selalu ada buat aku, meski kadang banyak masalah yang datang, yang rumit. Tapi aku percaya hubungan yang tanpa ada tantangan, menurutku itu hubungan main-main. Karna sejatinya disetiap hubungan pasti ada masalah yang datang, karna aku tau kita dua manusia yang dibesarkan dilingkungan berbeda, berbeda pendapat, berbeda pikiran. Tapi selagi kita masih saling cinta, pasti semuanya bisa lebih mudah buat dijalaninnyaa.. Kita usahakan buat selalu bersama-sama ya bebeyy.. Aku sayang sama kamu, BANGETT.. banyak air mata aku yang jatuh cuma takut kehilangan kamu, waktu kamu sakit, waktu kita berjarak, semuanya. Banyak juga perasaan senang aku, ketawa aku, karna tingkah lucu kamu, senyuman kamu, SEMUANYAA. Aku bersyukur ada kamu di sini bebeyy.. Kita udah sejauh ini.. aku ingin selamanyaa.. Terimakasih buat usaha kamu, ketawa kamu, tangisan kamu, segala hal, yang kamu ukir dihubungan kita. Terimakasih udah yakinin aku kalo semuanya pasti baik-baik aja, terimakasih untuk turunnya ego kamu disaat ego ku lagi tinggi.. Aku hargai semua jenis kasih sayangmu bubyy.. Semoga kita selalu tumbuh bersama ya.. Masih banyak harapan yang mau aku kabulkan bersama mu..</p>
+    </div>
+
+    <div style="text-align: center; margin: 40px 0; font-size: 0.8rem; color: #aaa;">
+      Dibuat dengan ❤️ oleh Alyzky
+    </div>
+  </div>
+
+  <script>
+    // Interaksi unik: Muncul hati saat paragraf diklik
+    document.getElementById('journal').addEventListener('click', function(e) {
+      if(e.target.tagName === 'P') {
+        const heart = document.createElement('div');
+        heart.innerHTML = '❤️';
+        heart.classList.add('heart');
+        heart.style.left = (e.pageX - 10) + 'px';
+        heart.style.top = (e.pageY - 10) + 'px';
+        document.body.appendChild(heart);
+        
+        setTimeout(() => {
+          heart.remove();
+        }, 3000);
+      }
+    });
+
+    // Pesan console rahasia
+    console.log("Ciee yang lagi baca memoar cinta! Tetap langgeng ya kalian!");
+  </script>
+</body>
+</html>
