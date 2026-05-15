@@ -16,10 +16,7 @@
       --text-color: #444;
     }
 
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
     body {
       background-color: var(--bg-color);
@@ -27,175 +24,122 @@
       background-size: 20px 20px;
       font-family: 'Quicksand', sans-serif;
       color: var(--text-color);
-      margin: 0;
-      padding: 0;
-      line-height: 1.6;
-      overflow-x: hidden;
+      margin: 0; padding: 0; line-height: 1.6; overflow-x: hidden;
     }
 
+    /* --- MUSIC PLAYER --- */
+    .music-widget {
+      position: fixed; top: 20px; right: 20px; z-index: 10001;
+      display: none; align-items: center; background: white;
+      padding: 8px 15px; border-radius: 50px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1); border: 2px solid var(--accent-color);
+      cursor: pointer;
+    }
+    .disk-img {
+      width: 35px; height: 35px; border-radius: 50%;
+      background: url('https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_140251.png');
+      background-size: cover; margin-right: 10px; border: 2px solid #333;
+      animation: rotateDisk 4s linear infinite; animation-play-state: paused;
+    }
+    .disk-img.playing { animation-play-state: running; }
+    @keyframes rotateDisk { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .music-info { font-family: 'Gochi Hand'; font-size: 0.8rem; color: var(--accent-color); }
+
+    /* --- NAVIGATION --- */
+    .nav-menu {
+      position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+      background: white; padding: 10px 25px; border-radius: 40px;
+      display: none; gap: 25px; box-shadow: 0 10px 25px rgba(255, 133, 162, 0.3);
+      z-index: 10000; border: 2px solid var(--accent-color);
+    }
+    .nav-btn { font-size: 1.4rem; cursor: pointer; transition: 0.3s; filter: grayscale(1); }
+    .nav-btn.active { filter: grayscale(0); transform: scale(1.2); }
+
+    .page-section { display: none; padding-bottom: 100px; }
+    .active-page { display: block; animation: pageIn 0.8s ease; }
+    @keyframes pageIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- LOGIN & STYLE ASLI --- */
     #overlay {
-      position: fixed;
-      top: 0; left: 0; width: 100%; height: 100%;
-      background: var(--bg-color);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: var(--bg-color); z-index: 9999;
+      display: flex; align-items: center; justify-content: center;
       transition: opacity 1s ease-out, transform 1s ease-out;
     }
-
     .login-card {
-      background: white;
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-      max-width: 90%;
-      width: 350px;
-      text-align: center;
-      border: 3px dashed var(--accent-color);
+      background: white; padding: 30px; border-radius: 20px;
+      box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 350px; max-width: 90%;
+      text-align: center; border: 3px dashed var(--accent-color);
       animation: float 3s ease-in-out infinite;
     }
+    @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+    .login-card h2 { font-family: 'Gochi Hand', cursive; color: var(--accent-color); font-size: 2rem; }
+    .login-card input { width: 100%; padding: 12px; margin: 20px 0; border: 2px solid #ffe4e1; border-radius: 12px; text-align: center; }
+    .login-card button { background: var(--accent-color); color: white; border: none; padding: 12px 30px; border-radius: 25px; font-weight: bold; cursor: pointer; }
 
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-10px); }
-    }
-
-    .login-card h2 {
-      font-family: 'Gochi Hand', cursive;
-      color: var(--accent-color);
-      font-size: 2rem;
-    }
-
-    .login-card input {
-      width: 100%;
-      padding: 12px;
-      margin: 20px 0;
-      border: 2px solid #ffe4e1;
-      border-radius: 12px;
-      text-align: center;
-      font-size: 1rem;
-    }
-
-    .login-card button {
-      background: var(--accent-color);
-      color: white;
-      border: none;
-      padding: 12px 30px;
-      border-radius: 25px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 5px 15px rgba(255, 133, 162, 0.4);
-    }
-
-    #main-content {
-      display: none;
-      padding: 20px;
-      animation: fadeIn 2s ease-in;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9); }
-      to { opacity: 1; transform: scale(1); }
-    }
-
-    .container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
+    .container { max-width: 800px; margin: 0 auto; padding: 0 15px; }
     .utama {
-      text-align: center;
-      background: var(--paper-color);
-      padding: 40px 20px;
-      margin: 40px 0;
-      transform: rotate(-1deg);
-      box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
+      text-align: center; background: var(--paper-color); padding: 40px 20px;
+      margin: 40px 0; transform: rotate(-1deg); box-shadow: 5px 5px 15px rgba(0,0,0,0.05);
       position: relative;
     }
-
     .utama::before {
-      content: "";
-      position: absolute;
-      top: -15px; left: 50%;
-      transform: translateX(-50%);
-      width: 120px; height: 35px;
-      background: var(--tape-color);
+      content: ""; position: absolute; top: -15px; left: 50%;
+      transform: translateX(-50%); width: 120px; height: 35px; background: var(--tape-color);
     }
-
-    h1 {
-      font-family: 'Gochi Hand', cursive;
-      font-size: clamp(2.5rem, 8vw, 3.5rem);
-      color: var(--accent-color);
-      margin: 0;
-    }
+    h1 { font-family: 'Gochi Hand', cursive; font-size: clamp(2.5rem, 8vw, 3.5rem); color: var(--accent-color); margin: 0; }
 
     .photo-frame {
-      width: 250px;
-      max-width: 80%;
-      background: white;
-      padding: 10px 10px 35px 10px;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-      margin: 30px auto;
-      text-align: center;
-      transition: 0.5s;
+      width: 250px; max-width: 80%; background: white; padding: 10px 10px 35px 10px;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.1); margin: 30px auto; text-align: center; transition: 0.5s;
     }
-
-    .photo-frame:hover { transform: rotate(0deg) scale(1.1); z-index: 5; }
-
+    .photo-frame:hover { transform: rotate(0deg) scale(1.05); z-index: 5; }
     .photo-frame img { width: 100%; height: auto; display: block; border-radius: 2px; }
-
-    .photo-frame span {
-      font-family: 'Indie Flower', cursive;
-      display: block;
-      margin-top: 10px;
-      font-size: 1.1rem;
-    }
+    .photo-frame span { font-family: 'Indie Flower', cursive; display: block; margin-top: 10px; font-size: 1.1rem; }
 
     .teksUtama p, .ucapan p {
-      background: #fff;
-      padding: 25px;
-      margin: 25px 0;
-      border-radius: 5px;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.03);
-      font-family: 'Patrick Hand', cursive;
-      font-size: 1.3rem;
-      position: relative;
+      background: #fff; padding: 25px; margin: 25px 0; border-radius: 5px;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.03); font-family: 'Patrick Hand', cursive;
+      font-size: 1.3rem; position: relative;
     }
-
     .teksUtama p:nth-child(odd) { transform: rotate(1deg); border-left: 8px solid #ffb6c1; }
     .teksUtama p:nth-child(even) { transform: rotate(-1deg); border-left: 8px solid #add8e6; }
+    .ucapan { background: #fff0f5; border: 3px dashed #ffb6c1; padding: 20px; border-radius: 20px; margin-top: 50px; }
 
-    .ucapan {
-      background: #fff0f5;
-      border: 3px dashed #ffb6c1;
-      padding: 20px;
-      border-radius: 20px;
-      margin-top: 50px;
-    }
+    /* --- GAME --- */
+    .memory-game { max-width: 400px; margin: 20px auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .card { aspect-ratio: 1; position: relative; transform-style: preserve-3d; transition: 0.6s; cursor: pointer; }
+    .card.flipped { transform: rotateY(180deg); }
+    .card-front, .card-back { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; border-radius: 10px; border: 3px solid white; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+    .card-front { background: var(--accent-color); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; }
+    .card-back { transform: rotateY(180deg); overflow: hidden; }
+    .card-back img { width: 100%; height: 100%; object-fit: cover; }
 
-    .heart {
-      position: absolute;
-      pointer-events: none;
-      animation: fly 2s linear forwards;
-      z-index: 100;
-    }
-
-    @keyframes fly {
-      0% { transform: translateY(0) scale(1); opacity: 1; }
-      100% { transform: translateY(-150px) rotate(20deg) scale(2); opacity: 0; }
-    }
-
-    .sticker {
-      position: fixed;
-      z-index: -1;
-      font-size: 2rem;
-      user-select: none;
-    }
+    .heart { position: absolute; pointer-events: none; animation: fly 2s linear forwards; z-index: 100; }
+    @keyframes fly { 0% { transform: translateY(0) scale(1); opacity: 1; } 100% { transform: translateY(-150px) rotate(20deg) scale(2); opacity: 0; } }
+    .sticker { position: fixed; z-index: -1; font-size: 2rem; user-select: none; }
   </style>
 </head>
 <body>
 
+  <!-- MUSIC PLAYER -->
+  <div class="music-widget" id="musicWidget" onclick="toggleMusic()">
+    <div class="disk-img" id="disk"></div>
+    <div class="music-info">Aku Milikmu - Dewa 19</div>
+    <audio id="bgMusic" loop>
+      <source src="https://files.catbox.moe/rrzdag.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <!-- NAVIGATION MENU -->
+  <div class="nav-menu" id="navMenu">
+    <div class="nav-btn active" onclick="showPage('page-home', this)">🏠</div>
+    <div class="nav-btn" onclick="showPage('page-about', this)">📔</div>
+    <div class="nav-btn" onclick="showPage('page-gallery', this)">🖼️</div>
+    <div class="nav-btn" onclick="showPage('page-game', this)">🎮</div>
+  </div>
+
+  <!-- LOGIN OVERLAY -->
   <div id="overlay">
     <div class="login-card">
       <h2>Halo Sayang! ❤️</h2>
@@ -212,34 +156,33 @@
     <div class="sticker" style="bottom: 10%; left: 10%;">✨</div>
     <div class="sticker" style="bottom: 20%; right: 5%;">🍦</div>
 
-    <div class="container">
-      <div class="utama">
-        <h1>Hai sayangg!</h1>
-        <p>Website ini aku jadikan kenangan agar kita tetep abadi, dan tertulis di dalam layar.</p>
-      </div>
-
-      <div class="photo-frame" style="transform: rotate(-3deg);">
-        <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260510-WA0004.jpg" alt="Foto 1">
-        <span>GEMASSSSS 😭😭🤏</span>
-      </div>
-
-      <div class="teksUtama" id="journal">
-        <p>Kamu sadar ga si perjalanan kita sudah sejauh inii!? AHAHAHAHA, padahal perasaanku belum begitu lama aku merayumu. Eh udah 1 tahun ajaa! padahal pas awal-awal kamu ragu adanya keberadaanku, ya emang sii.. aku terlalu sat-set, harusnya basa basi duluuu. SUSAH TAU DAPETIN KAMU, makanya aku bersyukur dan bangga bisa sejauh ini sama kamu, padahal dulunya cuma orang asing yang ga sengaja dipertemukan, dan anehnya langsung nyambung, AHAHAHAHA langsung baper lagi akunya.. Emang kamu tuh se-magis itu ya!? peletnya mantep banget!</p>
-
-        <div class="photo-frame" style="transform: rotate(4deg);">
-          <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_093408_301.webp" alt="Foto 2">
-          <span>JULUN-JULUNNN SKSSKKSSKKS 😽😽😽🤏🤏</span>
+    <!-- HALAMAN HOME (TEKS ASLI KAMU) -->
+    <div id="page-home" class="page-section active-page">
+      <div class="container">
+        <div class="utama">
+          <h1>Hai sayangg!</h1>
+          <p>Website ini aku jadikan kenangan agar kita tetep abadi, dan tertulis di dalam layar.</p>
         </div>
+        <div class="photo-frame" style="transform: rotate(-3deg);">
+          <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260510-WA0004.jpg">
+          <span>GEMASSSSS 😭😭🤏</span>
+        </div>
+        <div class="teksUtama">
+        <p>Kamu sadar ga si perjalanan kita sudah sejauh inii!? AHAHAHAHA, padahal perasaanku belum begitu lama aku merayumu. Eh udah 1 tahun ajaa! padahal pas awal-awal kamu ragu adanya keberadaanku, ya emang sii.. aku terlalu sat-set, harusnya basa basi duluuu. SUSAH TAU DAPETIN KAMU, makanya aku bersyukur dan bangga bisa sejauh ini sama kamu, padahal dulunya cuma orang asing yang ga sengaja dipertemukan, dan anehnya langsung nyambung, AHAHAHAHA langsung baper lagi akunya.. Emang kamu tuh se-magis itu ya!? peletnya mantep banget!</p>
+          
+          <div class="photo-frame" style="transform: rotate(4deg);">
+            <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_093408_301.webp">
+            <span>JULUN-JULUNNN SKSSKKSSKKS 😽😽😽🤏🤏</span>
+          </div>
 
         <p>Setelah pertemuan yang ga disengaja, kita semakij dekettt! udah nyambung, udah mulai ada perasaan yang munculll! jadi sering ngabarin, chatan, telponan, saling curhat, cerita keseharian kitaaa! SERU TAU, INI JADI HAL PALING INDAH YANG AKU DAPETIN SEJAUH INII</p>
 
         <p>Pas udah lumayan lama, kita mulai saling percaya satu sama lain, UDAH MULAI NIHH! mulai berkontribusi, TERUS JADIAN DEHH, KAMU TAU GA SI AKU SE-SENENG APA PAS UDAH JADIAN!? SENENG BANGETTT</p>
 
-        <div class="photo-frame" style="transform: rotate(-5deg);">
-          <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_092827.jpg" alt="Foto 3">
-          <span>UCULL 🍦✨</span>
-        </div>
-
+          <div class="photo-frame" style="transform: rotate(-5deg);">
+            <img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_092827.jpg">
+            <span>UCULL 🍦✨</span>
+          </div>
         <p>Singkat cerita, kita udah lumayan lama punya arti "kita". Udah ada masalah-masalah muncul nih, datengnya dari aku sii.. Y MAAB</p>
 
       <p>EH, TAPI KITA BISA LEWATIN SEMUANYAA, meski ada bencana-bencana longsor gempa si 😭</p>
@@ -252,61 +195,146 @@
 
       <p>YANG KE EMPATT, kalo gasalah kita makan di tukang nasi gorengggg, YANG KEMBALIANNYA SALAHHH, TERUS ADA RAMBUT DIMAKANAN KAMU, AHAHAHAHA, jujur yaa, aku kalo makan nasi ya kuat jirr, makanya kamu ga abis aku gabisaaa, GABISAA, ga kuattt, mana hp kamu jatoh lagi pas nonton, parah banget ya tukang jualnyaa</p>
 
-        <h5 style="font-family: 'Gochi Hand'; font-size: 2rem; text-align: center; color: var(--accent-color);">NANTI KITA UKIR CERITA KITA LAGI YAAAAAA! 🤏</h5>
-      </div>
-
-      <div class="ucapan">
+          <h5 style="font-family: 'Gochi Hand'; font-size: 2rem; text-align: center; color: var(--accent-color);">NANTI KITA UKIR CERITA KITA LAGI YAAAAAA! 🤏</h5>
+        </div>
+        <div class="ucapan">
       <p>Aku bersyukur adanya kamu disini bebeyy.. yang udah nemenin aku, yang selalu ada buat aku, meski kadang banyak masalah yang datang, yang rumit. Tapi aku percaya hubungan yang tanpa ada tantangan, menurutku itu hubungan main-main. Karna sejatinya disetiap hubungan pasti ada masalah yang datang, karna aku tau kita dua manusia yang dibesarkan dilingkungan berbeda, berbeda pendapat, berbeda pikiran. Tapi selagi kita masih saling cinta, pasti semuanya bisa lebih mudah buat dijalaninnyaa.. Kita usahakan buat selalu bersama-sama ya bebeyy.. Aku sayang sama kamu, BANGETT.. banyak air mata aku yang jatuh cuma takut kehilangan kamu, waktu kamu sakit, waktu kita berjarak, semuanya. Banyak juga perasaan senang aku, ketawa aku, karna tingkah lucu kamu, senyuman kamu, SEMUANYAA. Aku bersyukur ada kamu di sini bebeyy.. Kita udah sejauh ini.. aku ingin selamanyaa.. Terimakasih buat usaha kamu, ketawa kamu, tangisan kamu, segala hal, yang kamu ukir dihubungan kita. Terimakasih udah yakinin aku kalo semuanya pasti baik-baik aja, terimakasih untuk turunnya ego kamu disaat ego ku lagi tinggi.. Aku hargai semua jenis kasih sayangmu bubyy.. Semoga kita selalu tumbuh bersama ya.. Masih banyak harapan yang mau aku kabulkan bersama mu..</p>
+        </div>
       </div>
+    </div>
 
-      <div style="text-align: center; margin: 50px 0; font-size: 0.9rem; color: #888;">
-        Dibuat dengan segenap hati oleh Jaenar ✨
+    <!-- HALAMAN TENTANG KITA (BARU & RAPI) -->
+    <div id="page-about" class="page-section">
+      <div class="container">
+        <h2 style="font-family: 'Gochi Hand'; text-align: center; color: var(--accent-color); font-size: 2.5rem;">📔 Tentang Kita</h2>
+        <div class="teksUtama">
+          <p>Tentang Kamu:</p>
+          <p><b>Nama:</b> Siti Alawiyah (alys)<br>
+          <b>Makanan fav:</b> Dimsum, Ayam bakar, Martabak manis, Ceker<br>
+          <b>Minuman fav:</b> Air putih, Kopi good day freeze, Alpukat kocok, Milo kocok, Capucino, Jasjus jeruk peras</p>
+          
+          <p>Tentang Aku:</p>
+          <p><b>Nama:</b> Jaenar mohasan zaki (jeje)<br>
+          <b>Makanan fav:</b> Mie Ayam, seblak, brekele (INI ENAK BANGET ANJIR), ikan bakar, tumis daun cikur (CANDU BANGET INI)<br>
+          <b>Minuman fav:</b> Abc kopi susu, golda, bintang, matcha, jerus nipis, sirsak</p>          
+        </div>
       </div>
+    </div>
+
+    <!-- HALAMAN GALERI (BARU & AESTHETIC) -->
+    <div id="page-gallery" class="page-section">
+      <div class="container" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px;">
+        <h2 style="width:100%; text-align:center; font-family:'Gochi Hand'; color: var(--accent-color);">🖼️ Koleksi Foto Gemas</h2>
+        <div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260510-WA0004.jpg"><span>Gemas!</span></div>
+        <div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_093408_301.webp"><span>Julun..</span></div>
+        <div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG_20260515_092827.jpg"><span>Ucull ✨</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0054.jpg"><span>Nyam!</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0016.jpg"><span>AHAHAHAHA 😭</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0018.jpg"><span>OMG NAGA..</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0019.jpg"><span>ALIENN 😭😭</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0011.jpg"><span>EH EH BOCIL NGELENDOT</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0005.jpg"><span>LUCUU BANGETT!? 😫</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0042.jpg"><span>Muka-muka cabul</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0043.jpg"><span>🤟</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0044.jpg"><span>CISSSS</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(-5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0050.jpg"><span>KITA LUCU BANGET SI!?</span></div>
+<div class="photo-frame" style="width: 140px; transform: rotate(5deg);"><img src="https://raw.githubusercontent.com/zaenishi/alyzky/main/IMG-20260510-WA0056.jpg"><span>GEMESSHHH 😭🤏</span></div>
+      </div>
+    </div>
+
+    <!-- HALAMAN GAME -->
+    <div id="page-game" class="page-section">
+       <div class="container" style="text-align: center;">
+         <h2 style="font-family: 'Gochi Hand'; color: var(--accent-color); font-size: 2.5rem;">🎮 Find Our Match</h2>
+         <p>Cari pasangan foto kita yang sama BUBYYY</p>
+         <div class="memory-game" id="gameGrid"></div>
+         <button onclick="resetGame()" style="background: var(--accent-color); color:white; border:none; padding:10px 20px; border-radius:20px; margin-top:20px; cursor:pointer;">Reset 🔄</button>
+       </div>
     </div>
   </div>
 
   <script>
+    const music = document.getElementById('bgMusic');
+    const disk = document.getElementById('disk');
+
+    function toggleMusic() {
+      if (music.paused) { music.play(); disk.classList.add('playing'); } 
+      else { music.pause(); disk.classList.remove('playing'); }
+    }
+
+    function showPage(pageId, btn) {
+      document.querySelectorAll('.page-section').forEach(p => p.classList.remove('active-page'));
+      document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active-page');
+      btn.classList.add('active');
+      if(pageId === 'page-game') resetGame();
+      window.scrollTo(0,0);
+    }
+
     function bukaScrapbook() {
       const input = document.getElementById('dateInput').value;
-      const error = document.getElementById('pesanError');
       const targetDate = "2025-07-23";
+      const error = document.getElementById('pesanError');   
       const now = new Date();
-      
+               
       if (now.getMonth() < 6 && now.getFullYear() <= 2026) {
         error.innerText = "Sabar ya, kado ini baru bisa dibuka Juli 2026 nanti! 🤫";
         error.style.display = "block";
         return;
-      }
-
+      }      
       if (input === targetDate) {
-        confetti({
-          particleCount: 150,
-          spread: 70,
-          origin: { y: 0.6 },
-          colors: ['#ff85a2', '#ffb6c1', '#add8e6']
-        });
-
+        confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         document.getElementById('overlay').style.opacity = "0";
-        document.getElementById('overlay').style.transform = "scale(1.2)";
-        
         setTimeout(() => {
           document.getElementById('overlay').style.display = "none";
           document.getElementById('main-content').style.display = "block";
+          document.getElementById('musicWidget').style.display = "flex";
+          document.getElementById('navMenu').style.display = "flex";
+          music.play().then(() => disk.classList.add('playing')).catch(e => {});
         }, 1000);
       } else {
-        error.innerText = "Tanggalnya salah sayang.. coba ingat-ingat lagi! 🥺";
-        error.style.display = "block";
+        document.getElementById('pesanError').innerText = "Salah tanggal sayang.. 🥺";
+        document.getElementById('pesanError').style.display = "block";
       }
     }
 
-    document.addEventListener('click', function(e) {
+    // --- GAME LOGIC ---
+    const imgData = [
+      'https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260414-WA0035.jpg',
+      'https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260513-WA0063.jpg',
+      'https://raw.githubusercontent.com/zaenishi/alyzky/refs/heads/main/IMG-20260314-WA0253.jpg'
+    ];
+    let cards = [...imgData, ...imgData];
+    let flipped = [];
+    let matched = 0;
+
+    function resetGame() {
+      const grid = document.getElementById('gameGrid');
+      grid.innerHTML = ''; flipped = []; matched = 0;
+      cards.sort(() => Math.random() - 0.5);
+      cards.forEach((url) => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `<div class="card-front">?</div><div class="card-back"><img src="${url}"></div>`;
+        card.onclick = () => {
+          if (flipped.length < 2 && !card.classList.contains('flipped')) {
+            card.classList.add('flipped');
+            flipped.push({card, url});
+            if (flipped.length === 2) {
+              if (flipped[0].url === flipped[1].url) { matched++; flipped = []; if(matched === 3) confetti(); }
+              else { setTimeout(() => { flipped.forEach(c => c.card.classList.remove('flipped')); flipped = []; }, 800); }
+            }
+          }
+        };
+        grid.appendChild(card);
+      });
+    }
+
+    document.addEventListener('click', (e) => {
       if (e.target.closest('p')) {
         const heart = document.createElement('div');
-        heart.innerHTML = "❤️";
-        heart.className = "heart";
-        heart.style.left = e.pageX + "px";
-        heart.style.top = e.pageY + "px";
-        heart.style.fontSize = Math.random() * (30 - 20) + 20 + "px";
+        heart.innerHTML = "❤️"; heart.className = "heart";
+        heart.style.left = e.pageX + "px"; heart.style.top = e.pageY + "px";
         document.body.appendChild(heart);
         setTimeout(() => heart.remove(), 2000);
       }
